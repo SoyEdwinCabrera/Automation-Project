@@ -1,7 +1,7 @@
 
 # Automation Project
 
-Este proyecto de automatización está diseñado para realizar pruebas de login, logout y validaciones en el sitio [SauceDemo](https://www.saucedemo.com). Se utilizan tecnologías como Selenium (con Java), JUnit 5, y Maven para la administración de dependencias y ejecución de las pruebas automatizadas.
+Este proyecto de automatización está diseñado para realizar pruebas de login, logout y validaciones en el sitio [SauceDemo](https://www.saucedemo.com/v1/index.html). Se utilizan tecnologías como Selenium (con Java), JUnit 5, y Maven para la administración de dependencias y ejecución de las pruebas automatizadas.
 
 ## Tecnologías utilizadas
 
