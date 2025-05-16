@@ -1,86 +1,160 @@
-
 # Automation Project
 
-Este proyecto de automatización está diseñado para realizar pruebas de login, logout y validaciones en el sitio [SauceDemo](https://www.saucedemo.com/v1/index.html). Se utilizan tecnologías como Selenium (con Java), JUnit 5, y Maven para la administración de dependencias y ejecución de las pruebas automatizadas.
+Este proyecto de automatización está diseñado para realizar pruebas de login, logout y validaciones en el sitio [SauceDemo](https://www.saucedemo.com/v1/index.html). Utilizando un enfoque de Page Object Model (POM), el proyecto implementa pruebas automatizadas para verificar el comportamiento de la aplicación bajo diferentes escenarios de autenticación.
 
 ## Tecnologías utilizadas
 
 - 💻 macOS
 - ☕ JAVA JDK 23
 - 🔨 Maven 3.9.9
-- 📝 Zed IDE
+- 🌐 Selenium WebDriver 4.29.0
+- 🧪 JUnit Jupiter 5.8.2
+- 🧩 Patrón Page Object Model (POM)
 
-## Descripción
+## Descripción del proyecto
 
-El proyecto incluye:
-1. Clases de Page Object (Page Object Model - POM) que representan las diferentes pantallas:
-   - LoginPage (para el formulario de login).
-   - InventoryPage (para el inventario de productos y el menú lateral).
-   - Driver (clase base para la configuración de la ventana, tamaño y posición del navegador).
-2. Clases de prueba (Test classes) que usan JUnit 5:
-   - AppTest (pruebas enfocadas en la página de login).
-   - LoginLogoutTest (pruebas de login y logout, incluyendo la validación de diferentes usuarios).
-3. Clases de configuración y variables compartidas:
-   - TestVariables (constantes de URL, mensajes de error, credenciales de acceso y tiempos de espera básicos).
+El proyecto implementa un framework de automatización completo con:
+
+### 1. Clases de Page Object Model (POM)
+
+- **Driver**: Clase base que configura la ventana del navegador, su tamaño y posición, optimizada para mostrar el navegador en la mitad derecha de la pantalla para mejor visualización durante las pruebas.
+
+- **LoginPage**: Encapsula todas las operaciones relacionadas con la página de inicio de sesión:
+  - Métodos para ingresar credenciales
+  - Verificación de mensajes de error
+  - Comprobación de inicio de sesión exitoso
+  - Implementación de logout
+
+- **InventoryPage**: Maneja las interacciones con la página de inventario:
+  - Verificación de carga correcta
+  - Manipulación del menú lateral
+  - Proceso de cierre de sesión
+  - Verificación de redirección
+
+### 2. Clases de prueba
+
+- **AppTest**: Enfocado en probar la funcionalidad de la página de login:
+  - Validación de campos vacíos
+  - Validación de usuario sin contraseña
+  - Login exitoso con credenciales correctas
+  - Manejo de usuarios bloqueados
+
+- **LoginLogoutTest**: Prueba el flujo completo de login y logout:
+  - Prueba con usuario estándar
+  - Iteración a través de todos los tipos de usuarios válidos
+
+### 3. Configuración y variables compartidas
+
+- **TestVariables**: Centraliza todas las constantes utilizadas en las pruebas:
+  - URLs de la aplicación
+  - Mensajes de error esperados
+  - Credenciales de prueba
+  - Tiempos de espera configurables
+  - Lista de usuarios para pruebas de iteración
+
+## Pruebas implementadas
+
+### Pruebas de login (AppTest)
+
+1. **emptyLoginShouldShowUsernameRequired**: Verifica que al intentar iniciar sesión sin credenciales se muestre el mensaje de error de usuario requerido.
+2. **userOnlyLoginShouldShowPasswordRequired**: Comprueba que al proporcionar solo el nombre de usuario, se muestre el mensaje de error de contraseña requerida.
+3. **validLoginShouldRedirectToInventory**: Confirma que al proporcionar credenciales válidas, el usuario sea redirigido a la página de inventario.
+4. **lockedUserLoginShouldShowLockedMessage**: Verifica que al intentar iniciar sesión con un usuario bloqueado, se muestre el mensaje de error correspondiente.
+
+### Pruebas de login y logout (LoginLogoutTest)
+
+1. **testLoginLogoutStandardUser**: Prueba el flujo completo de inicio y cierre de sesión para un usuario estándar.
+2. **testLoginLogoutAllUsers**: Itera a través de todos los usuarios válidos definidos en TestVariables, realizando el flujo completo de login y logout para cada uno.
 
 ## Requisitos y configuración
 
-1. Java 11+ (o versión superior).  
-2. Maven 3.9.9 (para compilar y ejecutar las pruebas).  
-3. Un navegador compatible:
-   - De forma predeterminada se usa ChromeDriver en AppTest y SafariDriver en LoginLogoutTest.  
-   - Asegúrate de tener instalados los binarios correspondientes para tu SO:  
-     - [ChromeDriver](https://chromedriver.chromium.org/) (si usas Chrome).  
-     - [SafariDriver](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari) (en Mac con Safari incluido).  
-   - Para Safari, asegúrate de activar "Permitir control remoto de Safari" (Desarrollar → Permitir Automación remota) en las preferencias de Safari, de ser necesario.
+1. **Java 23** (o versión compatible).
+2. **Maven 3.9.9** (o versión compatible).
+3. **Navegadores compatibles**:
+   - **Chrome**: AppTest está configurado para usar ChromeDriver.
+   - **Safari**: LoginLogoutTest está configurado para usar SafariDriver.
 
-4. Configuraciones específicas del proyecto:
-   - El archivo TestVariables.java contiene las URLs (BASE_URL) y credenciales para la prueba.  
-   - El plugin Maven Surefire se encarga de detectar y ejecutar las pruebas en la carpeta “src/test/java/”.  
+4. **Drivers de navegador**:
+   - [ChromeDriver](https://chromedriver.chromium.org/) para pruebas con Chrome.
+   - [SafariDriver](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari) (incluido en macOS).
 
-## Pasos para configurar y ejecutar las pruebas
+5. **Configuración de Safari para pruebas**:
+   - Habilitar el menú de desarrollador: Safari → Preferencias → Avanzado → "Mostrar menú Desarrollar en la barra de menús".
+   - Habilitar Automation: Menú Desarrollar → "Permitir Automación remota".
 
-1. Clona o descarga el repositorio en tu máquina local.  
-   git clone https://github.com/SoyEdwinCabrera/automation_project.git  
+## Pasos para ejecutar las pruebas
 
-2. Asegúrate de tener Java y Maven instalados y configurados en tu variable PATH.  
-   - Puedes verificar tu versión con:  
-     java -version  
-     mvn -version  
+1. **Clonar el repositorio**:
+   ```
+   git clone https://github.com/SoyEdwinCabrera/Automation-Project.git
+   ```
 
-3. (Opcional para Chrome) Si ejecutas AppTest y deseas usar Chrome, descarga ChromeDriver y colócalo en tu PATH, o configura su ubicación.  
+2. **Verificar la instalación de Java y Maven**:
+   ```
+   java -version
+   mvn -version
+   ```
 
-4. (Opcional para Safari) Si ejecutas LoginLogoutTest y deseas utilizar Safari, habilita la automatización de Safari:  
-   - Abre Safari → Preferencias → Avanzado → Activa “Mostrar el menú Desarrollar en la barra de menús”.  
-   - Ve al menú “Desarrollar” → Selecciona “Permitir Automación remota” (si aparece).  
+3. **Configurar los navegadores**:
+   - Para Chrome: Descargar ChromeDriver y agregarlo al PATH.
+   - Para Safari: Habilitar la automación remota como se indicó anteriormente.
 
-5. Ubícate en la carpeta raíz del proyecto y ejecuta las pruebas con Maven:  
-   mvn clean test  
+4. **Ejecutar las pruebas**:
+   - Para ejecutar todas las pruebas:
+     ```
+     mvn clean test
+     ```
+   - Para ejecutar una clase de prueba específica:
+     ```
+     mvn clean test -Dtest=AppTest
+     ```
+     o
+     ```
+     mvn clean test -Dtest=LoginLogoutTest
+     ```
 
-6. Observa los resultados de la consola. Si la configuración está correcta, deberías ver un “BUILD SUCCESS” al final, junto con los reportes de las pruebas que se ejecutaron.  
+5. **Visualizar resultados**:
+   Los resultados se mostrarán en la consola. Además, las pruebas están configuradas con parámetros de visualización que permiten observar el comportamiento del navegador durante la ejecución.
 
 ## Estructura del proyecto
 
-- ┣ src  
-  ┃ ┣ main  
-  ┃ ┃ ┗ java (código principal, si lo hubiera)  
-  ┃ ┗ test  
-  ┃ ┃ ┣ java  
-  ┃ ┃ ┃ ┗ org  
-  ┃ ┃ ┃   ┗ portfolio  
-  ┃ ┃ ┃     ┣ config  
-  ┃ ┃ ┃     ┣ page  
-  ┃ ┃ ┃     ┣ AppTest.java  
-  ┃ ┃ ┃     ┗ LoginLogoutTest.java  
-- ┣ pom.xml (archivo de configuración de Maven)  
-- ┗ README.md (este archivo con la descripción y pasos)  
-
+```
+Automation-Project/
+├── README.md
+└── automation_project/
+    ├── pom.xml
+    └── src/
+        ├── main/
+        │   └── java/
+        │       └── org/
+        │           └── portfolio/
+        │               └── App.java
+        └── test/
+            └── java/
+            └── org/
+                └── portfolio/
+                    ├── config/
+                    │   └── TestVariables.java
+                    ├── page/
+                    │   ├── Driver.java
+                    │   ├── InventoryPage.java
+                    │   └── LoginPage.java
+                    ├── AppTest.java
+                    └── LoginLogoutTest.java
+                    
 ## Personalizaciones adicionales
 
-- Para cambiar la configuración del tiempo de espera (timeout) en las pruebas, modifica la constante DEFAULT_WAIT_TIMEOUT en TestVariables.java.  
-- Si deseas cambiar credenciales de acceso o URL, actualiza las variables en TestVariables.java.  
-- Para ejecutar las pruebas en un navegador específico (por ejemplo, Chrome o Safari), ajusta las clases de prueba (p.ej., LoginLogoutTest, AppTest) cambiando la instancia del WebDriver que desees usar.
+- **Tiempos de espera**: Modificar la constante `DEFAULT_WAIT_TIMEOUT` en TestVariables.java para cambiar el tiempo de espera predeterminado.
+- **Tiempo de visualización**: Ajustar `VISUALIZATION_DELAY` para aumentar o disminuir el tiempo de pausa entre acciones para visualización.
+- **Navegadores**: Para cambiar el navegador utilizado en una prueba específica, modificar la inicialización del WebDriver en el método `setUp()`:
+  - En AppTest.java para cambiar de Chrome a otro navegador.
+  - En LoginLogoutTest.java para cambiar de Safari a otro navegador.
+- **Usuarios de prueba**: Agregar o modificar usuarios en la clase TestVariables.java según sea necesario.
 
-## Contacto
+## Características destacadas
 
-Si tienes preguntas o sugerencias sobre este proyecto, no dudes en abrir un Issue o un Pull Request en este repositorio. ¡Gracias por contribuir!
+- **Robustez en automatización**: Implementa técnicas avanzadas para manejar casos problemáticos como el menú lateral de SauceDemo.
+- **Múltiples estrategias de interacción**: Utiliza diferentes enfoques (WebDriver estándar, JavaScript) para garantizar interacciones exitosas.
+- **Manejo eficiente de errores**: Implementa alternativas cuando las interacciones primarias fallan.
+- **Visualización de pruebas**: Incluye pausas configurables para observar el comportamiento del navegador durante las pruebas.
+- **Configuración optimizada de ventana**: Posicionamiento automático del navegador para mejorar la visualización durante las pruebas.
