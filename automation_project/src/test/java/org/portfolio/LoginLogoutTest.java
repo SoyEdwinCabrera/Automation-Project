@@ -52,6 +52,12 @@ public class LoginLogoutTest {
     @Test
     @DisplayName("Login y Logout para usuario estándar")
     public void testLoginLogoutStandardUser() {
+        System.out.println("""
+            
+            ************************************************
+            TEST LOGIN Y LOGOUT PARA USUARIO ESTÁNDAR
+            ************************************************
+            """);
         // Login
         loginPage.login(TestVariables.STANDARD_USERNAME, TestVariables.PASSWORD);
         
@@ -70,11 +76,22 @@ public class LoginLogoutTest {
         
         // Verificar logout exitoso
         assertTrue(inventoryPage.isLogoutSuccessful(), "Logout failed");
+        System.out.println("""
+            
+            ************************************************
+            
+            """);
     }
     
     @Test
     @DisplayName("Login y Logout para todos los usuarios válidos")
     public void testLoginLogoutAllUsers() {
+        System.out.println("""
+            
+            ************************************************
+            TEST LOGIN Y LOGOUT PARA TODOS LOS USUARIOS
+            ************************************************
+            """);
         // Iterar por todos los usuarios válidos
         for (String username : TestVariables.ALL_USERNAMES) {
             System.out.println("\n--- Probando usuario: " + username + " ---");
@@ -102,6 +119,11 @@ public class LoginLogoutTest {
             
             // Pausa breve entre usuarios
             waitForDemoVisualization();
+            System.out.println("""
+                
+                ************************************************
+                
+                """);
         }
     }
 }

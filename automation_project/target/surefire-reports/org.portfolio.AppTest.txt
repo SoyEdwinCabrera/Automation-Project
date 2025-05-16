@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.portfolio.AppTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.831 s - in org.portfolio.AppTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 28.396 s - in org.portfolio.AppTest

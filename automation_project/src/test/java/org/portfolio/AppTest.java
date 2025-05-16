@@ -58,6 +58,12 @@ public class AppTest {
     @Test
     @DisplayName("Login sin credenciales debe mostrar error de usuario requerido")
     public void emptyLoginShouldShowUsernameRequired() {
+        System.out.println("""
+            
+            ************************************************
+            TEST USUARIO REQUERIDO
+            ************************************************
+            """);
         // Ejecutar login con campos vacíos
         loginPage.login("", "");
         
@@ -66,11 +72,22 @@ public class AppTest {
         waitForDemoVisualization();
         
         assertEquals(TestVariables.ERROR_USERNAME_REQUIRED, loginPage.getErrorMessage());
+        System.out.println("""
+            
+            ************************************************
+            
+            """);
     }
     
     @Test
     @DisplayName("Login solo con usuario debe mostrar error de contraseña requerida")
     public void userOnlyLoginShouldShowPasswordRequired() {
+        System.out.println("""
+            
+            ************************************************
+            TEST CONTRASEÑA REQUERIDA
+            ************************************************
+            """);
         // Ejecutar login solo con usuario
         loginPage.login(TestVariables.STANDARD_USERNAME, "");
         
@@ -79,11 +96,22 @@ public class AppTest {
         waitForDemoVisualization();
         
         assertEquals(TestVariables.ERROR_PASSWORD_REQUIRED, loginPage.getErrorMessage());
+        System.out.println("""
+            
+            ************************************************
+            
+            """);
     }
     
     @Test
     @DisplayName("Login con credenciales correctas debe redirigir al inventario")
     public void validLoginShouldRedirectToInventory() {
+        System.out.println("""
+            
+            ************************************************
+            TEST LOGIN Y REDIRECCIÓN AL INVENTARIO
+            ************************************************
+            """);
         // Ejecutar login con credenciales válidas
         loginPage.login(TestVariables.STANDARD_USERNAME, TestVariables.PASSWORD);
         
@@ -93,11 +121,22 @@ public class AppTest {
         
         assertTrue(driver.getCurrentUrl().contains(TestVariables.INVENTORY_PAGE), 
                    "Login failed - Not redirected to inventory page");
+        System.out.println("""
+            
+            ************************************************
+            
+            """);
     }
     
     @Test
     @DisplayName("Login con usuario bloqueado debe mostrar mensaje de bloqueo")
     public void lockedUserLoginShouldShowLockedMessage() {
+        System.out.println("""
+            
+            ************************************************
+            TEST LOGIN CON USUARIO BLOQUEADO
+            ************************************************
+            """);
         // Ejecutar login con usuario bloqueado
         loginPage.login(TestVariables.LOCKED_USERNAME, TestVariables.PASSWORD);
         
@@ -106,5 +145,10 @@ public class AppTest {
         waitForDemoVisualization();
         
         assertEquals(TestVariables.ERROR_LOCKED_USER, loginPage.getErrorMessage());
+        System.out.println("""
+            
+            ************************************************
+            
+            """);
     }
 }
