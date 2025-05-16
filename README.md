@@ -2,7 +2,7 @@
 
 Este proyecto de automatización está diseñado para realizar pruebas de login, logout y validaciones en el sitio [SauceDemo](https://www.saucedemo.com/v1/index.html). Utilizando un enfoque de Page Object Model (POM), el proyecto implementa pruebas automatizadas para verificar el comportamiento de la aplicación bajo diferentes escenarios de autenticación.
 
-[![Video de demostración](/Automation-Project/automation_project/assets/Automation_1.gif)](/Automation-Project/automation_project/assets/Automation_1.gif)
+[![Video de demostración](/automation_project/assets/Automation_1.gif)](/automation_project/assets/Automation_1.gif)
 
 ## Tecnologías utilizadas
 
