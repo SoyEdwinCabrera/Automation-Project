@@ -143,7 +143,8 @@ Automation-Project/
                     │   └── LoginPage.java
                     ├── AppTest.java
                     └── LoginLogoutTest.java
-                    
+```
+
 ## Personalizaciones adicionales
 
 - **Tiempos de espera**: Modificar la constante `DEFAULT_WAIT_TIMEOUT` en TestVariables.java para cambiar el tiempo de espera predeterminado.
